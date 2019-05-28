@@ -1,5 +1,5 @@
 //
-//  Joke.swift
+//  Bearer.swift
 //  DadJokes
 //
 //  Created by Jeremy Taylor on 5/28/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Joke: Codable {
-    let id: Int
-    var jokeContent: String
+struct Bearer: Codable {
+    var token: String
 }
+
