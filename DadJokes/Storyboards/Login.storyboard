@@ -40,6 +40,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HX-V0-Def">
                                         <rect key="frame" x="0.0" y="76" width="286" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <state key="normal" title="LOGIN"/>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="qda-6l-Cjl" eventType="touchUpInside" id="StI-ia-wsO"/>
@@ -90,6 +91,7 @@
                         <outlet property="button" destination="4HX-V0-Def" id="OmE-vl-Sta"/>
                         <outlet property="emailTextField" destination="All-r5-fvR" id="ygP-0V-VNd"/>
                         <outlet property="entryMethodSegmentedControl" destination="fLy-aN-uVf" id="KoM-pQ-hY3"/>
+                        <outlet property="noAccountLabel" destination="Ao1-Fc-V0N" id="YQI-O8-U6C"/>
                         <outlet property="passwordTextField" destination="k56-MW-Ovb" id="ngV-7N-W9r"/>
                         <segue destination="l8E-d3-Ntw" kind="show" id="zkj-cu-Fks"/>
                     </connections>
