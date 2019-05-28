@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="0oQ-hc-95v">
             <objects>
-                <viewController id="qda-6l-Cjl" sceneMemberID="viewController">
+                <viewController id="qda-6l-Cjl" customClass="LoginViewController" customModule="DadJokes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eA8-Fp-Wzg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,6 +41,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HX-V0-Def">
                                         <rect key="frame" x="0.0" y="76" width="286" height="30"/>
                                         <state key="normal" title="LOGIN"/>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="qda-6l-Cjl" eventType="touchUpInside" id="StI-ia-wsO"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zkj-qM-NlQ">
                                         <rect key="frame" x="0.0" y="114" width="286" height="27"/>
@@ -64,6 +67,9 @@
                                             <segment title="Login"/>
                                             <segment title="Sign Up"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="entryMethodChanged:" destination="qda-6l-Cjl" eventType="valueChanged" id="yO7-9o-Dle"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
@@ -80,10 +86,25 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CaL-UP-20Y"/>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="4HX-V0-Def" id="OmE-vl-Sta"/>
+                        <outlet property="emailTextField" destination="All-r5-fvR" id="ygP-0V-VNd"/>
+                        <outlet property="entryMethodSegmentedControl" destination="fLy-aN-uVf" id="KoM-pQ-hY3"/>
+                        <outlet property="passwordTextField" destination="k56-MW-Ovb" id="ngV-7N-W9r"/>
+                        <segue destination="l8E-d3-Ntw" kind="show" id="zkj-cu-Fks"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D5m-YD-48g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250.72463768115944" y="168.75"/>
+            <point key="canvasLocation" x="380" y="131"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="j6e-rI-09J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="l8E-d3-Ntw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s89-6U-Rz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="169"/>
         </scene>
     </scenes>
 </document>
