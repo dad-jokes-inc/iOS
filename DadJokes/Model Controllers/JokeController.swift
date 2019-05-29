@@ -41,7 +41,7 @@ class JokeController {
             request.httpBody = try JSONEncoder().encode(user)
         } catch {
             NSLog("Error encoding User: \(error)")
-            completion(error)
+            completion(Errors.encodingError)
             return
         }
         
@@ -51,13 +51,13 @@ class JokeController {
                 response.statusCode != 200 {
                 
                 // Something went wrong
-                completion(NSError())
+                completion(Errors.unexpectedResponseError)
                 return
             }
             
             if let error = error {
                 NSLog("Error signing up: \(error)")
-                completion(error)
+                completion(Errors.signupError)
                 return
             }
             
@@ -82,7 +82,7 @@ class JokeController {
             request.httpBody = try JSONEncoder().encode(user)
         } catch {
             NSLog("Error encoding User: \(error)")
-            completion(error)
+            completion(Errors.encodingError)
             return
         }
         
@@ -92,13 +92,13 @@ class JokeController {
                 response.statusCode != 200 {
                 
                 // Something went wrong
-                completion(NSError())
+                completion(Errors.unexpectedResponseError)
                 return
             }
             
             if let error = error {
                 NSLog("Error logging in: \(error)")
-                completion(error)
+                completion(Errors.loginError)
                 return
             }
             
@@ -106,7 +106,7 @@ class JokeController {
             
             guard let data = data else {
                 NSLog("No data returned from data task")
-                completion(NSError())
+                completion(Errors.noDataError)
                 return
             }
             
@@ -120,7 +120,7 @@ class JokeController {
                 completion(nil)
             } catch {
                 NSLog("Error decoding Bearer: \(error)")
-                completion(error)
+                completion(Errors.noTokenError)
                 return
             }
             }.resume()
@@ -130,7 +130,7 @@ class JokeController {
        
         guard let bearer = bearer else {
             NSLog("No bearer token available")
-            completion(NSError())
+            completion(Errors.noTokenError)
             return
         }
         
@@ -148,20 +148,20 @@ class JokeController {
             
             if let response = response as? HTTPURLResponse,
                 response.statusCode == 401 {
-                NSLog("Bad auth: \(error)")
-                completion(error)
+                NSLog("Bad auth: \(String(describing: error))")
+                completion(Errors.authError)
                 return
             }
             
             if let error = error {
                 NSLog("Error getting jokes: \(error)")
-                completion(error)
+                completion(Errors.noJokesError)
                 return
             }
             
             guard let data = data else {
-                NSLog("No data returned: \(error)")
-                completion(error)
+                NSLog("No data returned: \(String(describing: error))")
+                completion(Errors.noDataError)
                 return
             }
             
@@ -172,7 +172,7 @@ class JokeController {
                 completion(nil)
             } catch {
                 NSLog("Error decoding jokes: \(error)")
-                completion(error)
+                completion(Errors.decodingError)
             }
             }.resume()
     }
