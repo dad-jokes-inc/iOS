@@ -9,6 +9,10 @@
 import Foundation
 
 class JokeController {
+    
+    init() {
+        loadFromPersistentStore()
+    }
     enum HTTPMethod: String {
         case get = "GET"
         case put = "PUT"
@@ -17,11 +21,13 @@ class JokeController {
     }
     var jokes: [Joke] = []
     
-    private let baseURL = URL(string: "https://dad-jokes-buildweek.herokuapp.com/api")!
     
     var bearer: Bearer?
+    var user: User?
     
+    private let baseURL = URL(string: "https://dad-jokes-buildweek.herokuapp.com/api")!
     
+    //MARK: - Register
     
     
     func createUser(name: String, password: String, completion: @escaping (Error?) -> Void) {
@@ -46,7 +52,7 @@ class JokeController {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { (_, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let response = response as? HTTPURLResponse,
                 response.statusCode != 201 {
@@ -56,16 +62,37 @@ class JokeController {
                 return
             }
             
+            
+            
             if let error = error {
                 NSLog("Error signing up: \(error)")
                 completion(Errors.signupError)
                 return
             }
             
+            guard let data = data else {
+                completion(Errors.noDataError)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            do {
+                let user = try decoder.decode(User.self, from: data)
+                self.user = user
+                print(user.id)
+                self.saveToPersistentStore()
+                
+            } catch {
+                NSLog("Error decoding user")
+                completion(Errors.decodingError)
+            }
+            
             completion(nil)
             }.resume()
         
     }
+    
+    //MARK: - Login
     
     func logIn(with username: String, password: String, completion: @escaping (Error?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("login")
@@ -119,6 +146,7 @@ class JokeController {
                 
                 // We now have the bearer to authenticate the other requests
                 self.bearer = bearer
+                
                 completion(nil)
             } catch {
                 NSLog("Error decoding Bearer: \(error)")
@@ -128,13 +156,9 @@ class JokeController {
             }.resume()
     }
     
+    //MARK: - Fetch Jokes
+    
     func fetchAllJokes(completion: @escaping (Error?) -> Void) {
-       
-        guard let bearer = bearer else {
-            NSLog("No bearer token available")
-            completion(Errors.noTokenError)
-            return
-        }
         
         let requestURL = baseURL
             .appendingPathComponent("jokes")
@@ -143,7 +167,11 @@ class JokeController {
         
         request.httpMethod = HTTPMethod.get.rawValue
         
-        // This is our method of authenticating with the API.
+                guard let bearer = bearer else {
+                    completion(Errors.noTokenError)
+                    return
+                }
+        
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -177,5 +205,189 @@ class JokeController {
                 completion(Errors.decodingError)
             }
             }.resume()
+    }
+    
+    //MARK: - Create Joke
+    
+    func createJoke(userID: Int, jokeContent: String, completion: @escaping (Error?) -> Void) {
+        
+        let requestURL = baseURL.appendingPathComponent("jokes")
+        print(requestURL)
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.post.rawValue
+        
+                guard let bearer = bearer else {
+                    completion(Errors.noTokenError)
+                    return
+                }
+        
+        
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let joke = Joke(id: nil, joke: jokeContent, userID: userID)
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(joke)
+        } catch {
+            NSLog("Error encoding Joke: \(error)")
+            completion(Errors.encodingError)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                
+                // Something went wrong
+                completion(Errors.unexpectedResponseError)
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error creating joke: \(error)")
+                completion(Errors.errorCreatingJoke)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+        
+    }
+    
+    //MARK: - Delete Joke
+    
+    func deleteJoke(jokeID: Int, completion: @escaping (Error?) -> Void) {
+        
+        let requestURL = baseURL.appendingPathComponent("jokes").appendingPathComponent(String(jokeID))
+        
+        print(requestURL)
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.delete.rawValue
+        
+                guard let bearer = bearer else {
+                    completion(Errors.noTokenError)
+                    return
+                }
+        
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                
+                // Something went wrong
+                completion(Errors.unexpectedResponseError)
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error deleting joke: \(error)")
+                completion(Errors.errorDeletingJoke)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+        
+    }
+    
+    //MARK: - Update joke
+    
+    func updateJoke(jokeID: Int, jokeContent: String, userID: Int, completion: @escaping (Error?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("jokes").appendingPathComponent(String(jokeID))
+        
+        print(requestURL)
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+                guard let bearer = bearer else {
+                    completion(Errors.noTokenError)
+                    return
+                }
+        
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let joke = Joke(id: jokeID, joke: jokeContent, userID: userID)
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(joke)
+        } catch {
+            NSLog("Error encoding Joke: \(error)")
+            completion(Errors.encodingError)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                
+                // Something went wrong
+                completion(Errors.unexpectedResponseError)
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error updating joke: \(error)")
+                completion(Errors.errorUpdatingJoke)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+    }
+    
+    // MARK: - Persistance
+    
+    private var persistentFileURL: URL? {
+        let fm = FileManager.default
+        
+        guard let documentsDirectory = fm.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        
+        return documentsDirectory.appendingPathComponent("DadJokes.plist")
+    }
+    
+    func saveToPersistentStore() {
+        guard let url = persistentFileURL else { return }
+        
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(user)
+            try data.write(to: url)
+        } catch {
+            NSLog("Couldn't save user data: \(error)")
+        }
+    }
+    
+    func loadFromPersistentStore() {
+        do {
+            let fm = FileManager.default
+            guard let url = persistentFileURL, fm.fileExists(atPath: url.path) else { return }
+            let data = try Data(contentsOf: url)
+            let decoder = PropertyListDecoder()
+            let decodedUser = try decoder.decode(User.self, from: data)
+            self.user = decodedUser
+        } catch {
+            NSLog("Couldn't load user data: \(error)")
+        }
     }
 }
