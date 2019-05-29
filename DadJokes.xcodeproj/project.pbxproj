@@ -13,10 +13,13 @@
 		8FB9AF1C229DA28900E620F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9AF1B229DA28900E620F9 /* Assets.xcassets */; };
 		8FB9AF1F229DA28900E620F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9AF1D229DA28900E620F9 /* LaunchScreen.storyboard */; };
 		8FB9AF28229DA2E500E620F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AF27229DA2E500E620F9 /* User.swift */; };
-		8FB9AF2A229DA2FC00E620F9 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AF29229DA2FC00E620F9 /* Joke.swift */; };
 		EF2A8B63229DBE360020076D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2A8B62229DBE360020076D /* Login.storyboard */; };
 		EF2A8B65229DC9240020076D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B64229DC9240020076D /* LoginViewController.swift */; };
 		EF2A8B68229DCF770020076D /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B67229DCF770020076D /* AppearanceHelper.swift */; };
+		EF36862E229EF6D50038ED77 /* JokeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF36862D229EF6D50038ED77 /* JokeController.swift */; };
+		EF368630229EF6E90038ED77 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF36862F229EF6E90038ED77 /* Bearer.swift */; };
+		EF368632229EF6F70038ED77 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF368631229EF6F60038ED77 /* Errors.swift */; };
+		EF368634229EF7970038ED77 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF368633229EF7970038ED77 /* Joke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +31,13 @@
 		8FB9AF1E229DA28900E620F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FB9AF20229DA28900E620F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB9AF27229DA2E500E620F9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		8FB9AF29229DA2FC00E620F9 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
 		EF2A8B62229DBE360020076D /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		EF2A8B64229DC9240020076D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF2A8B67229DCF770020076D /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
+		EF36862D229EF6D50038ED77 /* JokeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JokeController.swift; path = "Model Controllers/JokeController.swift"; sourceTree = "<group>"; };
+		EF36862F229EF6E90038ED77 /* Bearer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		EF368631229EF6F60038ED77 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		EF368633229EF7970038ED77 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,7 @@
 		8FB9AF13229DA28800E620F9 /* DadJokes */ = {
 			isa = PBXGroup;
 			children = (
+				EF36862D229EF6D50038ED77 /* JokeController.swift */,
 				8FB9AF14229DA28800E620F9 /* AppDelegate.swift */,
 				8FB9AF2C229DA31200E620F9 /* View Controllers */,
 				8FB9AF26229DA2A900E620F9 /* Storyboards */,
@@ -89,7 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				8FB9AF27229DA2E500E620F9 /* User.swift */,
-				8FB9AF29229DA2FC00E620F9 /* Joke.swift */,
+				EF368633229EF7970038ED77 /* Joke.swift */,
+				EF36862F229EF6E90038ED77 /* Bearer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				EF2A8B67229DCF770020076D /* AppearanceHelper.swift */,
+				EF368631229EF6F60038ED77 /* Errors.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -183,11 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF368630229EF6E90038ED77 /* Bearer.swift in Sources */,
 				8FB9AF17229DA28800E620F9 /* ViewController.swift in Sources */,
 				8FB9AF15229DA28800E620F9 /* AppDelegate.swift in Sources */,
-				8FB9AF2A229DA2FC00E620F9 /* Joke.swift in Sources */,
 				EF2A8B65229DC9240020076D /* LoginViewController.swift in Sources */,
 				8FB9AF28229DA2E500E620F9 /* User.swift in Sources */,
+				EF368634229EF7970038ED77 /* Joke.swift in Sources */,
+				EF36862E229EF6D50038ED77 /* JokeController.swift in Sources */,
+				EF368632229EF6F70038ED77 /* Errors.swift in Sources */,
 				EF2A8B68229DCF770020076D /* AppearanceHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
