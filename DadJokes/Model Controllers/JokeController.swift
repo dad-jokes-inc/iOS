@@ -27,6 +27,7 @@ class JokeController {
     func createUser(name: String, password: String, completion: @escaping (Error?) -> Void) {
         
         let requestURL = baseURL.appendingPathComponent("register")
+        print(requestURL)
         
         var request = URLRequest(url: requestURL)
         
@@ -35,7 +36,7 @@ class JokeController {
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let user = User(username: name, password: password)
+        let user = User(id: nil, username: name, password: password)
         
         do {
             request.httpBody = try JSONEncoder().encode(user)
@@ -48,7 +49,7 @@ class JokeController {
         URLSession.shared.dataTask(with: request) { (_, response, error) in
             
             if let response = response as? HTTPURLResponse,
-                response.statusCode != 200 {
+                response.statusCode != 201 {
                 
                 // Something went wrong
                 completion(Errors.unexpectedResponseError)
@@ -76,10 +77,11 @@ class JokeController {
         // The body of our request is JSON.
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let user = User(username: username, password: password)
+        let user = User(id: nil, username: username, password: password)
         
         do {
             request.httpBody = try JSONEncoder().encode(user)
+            
         } catch {
             NSLog("Error encoding User: \(error)")
             completion(Errors.encodingError)
