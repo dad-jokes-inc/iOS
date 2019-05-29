@@ -9,12 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let jokeController = JokeController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        jokeController.logIn(with: "Hayden", password: "Hastings") { (error) in
+            if let error = error {
+                print("Error loging in: \(error)")
+                return
+            }
+        }
     }
-
-
 }
 

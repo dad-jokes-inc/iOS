@@ -12,7 +12,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    var jokeController: JokeController?
+    var jokeController = JokeController()
     var loginType: LoginType = .signUp
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -102,8 +102,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard let username = emailTextField.text,
             let password = passwordTextField.text else { return }
         
-        if loginType == .signUp {
-            jokeController?.createUser(name: username, password: password, completion: { (error) in
+        switch loginType {
+            
+        case .signUp:
+            
+            jokeController.createUser(name: username, password: password, completion: { (error) in
                 if let error = error {
                     NSLog("Error signing up \(error)")
                 } else {
@@ -119,8 +122,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             })
-        } else {
-            jokeController?.logIn(with: username, password: password, completion: { (error) in
+       
+        case .logIn:
+        
+            jokeController.logIn(with: username, password: password, completion: { (error) in
                 if let error = error {
                     NSLog("Error logging in: \(error)")
                 } else {
@@ -130,6 +135,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+        print("Button Works")
     }
     
     @IBAction func entryMethodChanged(_ sender: Any) {
