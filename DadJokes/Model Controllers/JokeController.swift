@@ -19,8 +19,10 @@ class JokeController {
         case post = "POST"
         case delete = "DELETE"
     }
-    var jokes: [Joke] = []
     
+    var publicJokes: [PublicJoke] = []
+    
+    var jokes: [Joke] = []
     
     var bearer: Bearer?
     var user: User?
@@ -152,6 +154,44 @@ class JokeController {
                 NSLog("Error decoding Bearer: \(error)")
                 completion(Errors.noTokenError)
                 return
+            }
+            }.resume()
+    }
+    
+    //MARK: - Fetch Public Jokes
+    
+    func fetchPublicJokes(completion: @escaping (Error?) -> Void) {
+        let requestURL = baseURL
+            .appendingPathComponent("public")
+        
+        print(requestURL)
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error getting public jokes: \(error)")
+                completion(Errors.noPublicJokesError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned: \(String(describing: error))")
+                completion(Errors.noDataError)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                self.publicJokes = try decoder.decode([PublicJoke].self, from: data)
+                completion(nil)
+            } catch {
+                NSLog("Error decoding jokes: \(error)")
+                completion(Errors.decodingError)
             }
             }.resume()
     }
