@@ -14,10 +14,6 @@ class JokesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        jokeController.createPublicJoke(jokeContent: "Test Public Joke from Jeremy") { (error) in
-            
-        }
-        
         jokeController.fetchPublicJokes { (error) in
             if let error = error {
                 print(error)
@@ -56,31 +52,52 @@ class JokesTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let _ = jokeController.bearer {
-            return jokeController.jokes.count
+        if section == 0 {
+            return jokeController.publicJokes.count
+        } else {
+            if section == 1 {
+                if let _ = jokeController.bearer {
+                    return jokeController.jokes.count
+            }
+            
         }
-        
-        return jokeController.publicJokes.count
     }
+        return 0
+}
+
+        
+        
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath)
         
-        if let _ = jokeController.bearer {
-           let joke = jokeController.jokes[indexPath.row]
-            cell.textLabel?.text = joke.joke
+        if indexPath.section == 0 {
+            let joke = jokeController.publicJokes[indexPath.row]
+            cell.textLabel?.text = joke.publicJoke
+        } else {
+            if let _ = jokeController.bearer {
+                let joke = jokeController.jokes[indexPath.row]
+                cell.textLabel?.text = joke.joke
+            }
         }
         
-       let joke = jokeController.publicJokes[indexPath.row]
-        
-        cell.textLabel?.text = joke.publicJoke
-        
-        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Public Jokes"
+        } else {
+            return "Private Jokes"
+        }
     }
     
 

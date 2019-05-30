@@ -353,7 +353,6 @@ class JokeController {
     
     func createPublicJoke(jokeContent: String, completion: @escaping (Error?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("public")
-        print(requestURL)
         
         var request = URLRequest(url: requestURL)
         
