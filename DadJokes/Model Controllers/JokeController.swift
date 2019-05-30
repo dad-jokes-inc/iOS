@@ -164,8 +164,6 @@ class JokeController {
         let requestURL = baseURL
             .appendingPathComponent("public")
         
-        print(requestURL)
-        
         var request = URLRequest(url: requestURL)
         
         request.httpMethod = HTTPMethod.get.rawValue

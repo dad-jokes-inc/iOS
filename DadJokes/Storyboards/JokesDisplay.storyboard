@@ -42,12 +42,25 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Dad Jokes" id="Wio-gi-7gF">
+                        <barButtonItem key="leftBarButtonItem" title="Signup/Login" id="4gt-oL-Cwl">
+                            <connections>
+                                <segue destination="NCU-TV-8h2" kind="presentation" identifier="ShowLoginVC" id="aEH-0w-IjI"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8mh-uR-t3N"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySt-Nd-hnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="189.50892857142856"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="Ujh-ZB-2aI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="NCU-TV-8h2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QnN-md-jnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1470" y="170"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ryA-BN-gBe">

@@ -12,7 +12,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    var jokeController: JokeController?
+    var jokeController: JokeController? 
     var loginType: LoginType = .signUp
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
