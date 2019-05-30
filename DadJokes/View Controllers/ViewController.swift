@@ -14,12 +14,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        jokeController.logIn(with: "Hayden", password: "Hastings") { (error) in
-            if let error = error {
-                print("Error loging in: \(error)")
-                return
-            }
-        }
+       
     }
 }
 

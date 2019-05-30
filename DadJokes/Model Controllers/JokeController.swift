@@ -349,6 +349,49 @@ class JokeController {
         
     }
     
+    //MARK: - Create Public Joke
+    
+    func createPublicJoke(jokeContent: String, completion: @escaping (Error?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("public")
+        print(requestURL)
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.post.rawValue
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let publicJoke = PublicJoke(id: nil, publicJoke: jokeContent)
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(publicJoke)
+        } catch {
+            NSLog("Error encoding Joke: \(error)")
+            completion(Errors.encodingError)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                
+                // Something went wrong
+                completion(Errors.unexpectedResponseError)
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error creating joke: \(error)")
+                completion(Errors.errorCreatingPublicJoke)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+        
+    }
+    
     
     //MARK: - Create Joke
     

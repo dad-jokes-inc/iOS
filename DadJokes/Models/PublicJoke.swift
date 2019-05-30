@@ -9,6 +9,20 @@
 import Foundation
 
 struct PublicJoke: Codable {
-    let id: Int
+    let id: Int?
     let publicJoke: String
+}
+
+extension PublicJoke {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case publicJoke
+        
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(publicJoke, forKey: .publicJoke)
+        
+    }
 }

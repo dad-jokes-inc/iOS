@@ -20,6 +20,7 @@ enum Errors: Error {
     case noJokesError
     case noJokesByUserError
     case noJokeWithProvidedID
+    case errorCreatingPublicJoke
     case errorCreatingJoke
     case errorDeletingJoke
     case errorUpdatingJoke

@@ -14,6 +14,10 @@ class JokesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        jokeController.createPublicJoke(jokeContent: "Test Public Joke from Jeremy") { (error) in
+            
+        }
+        
         jokeController.fetchPublicJokes { (error) in
             if let error = error {
                 print(error)
