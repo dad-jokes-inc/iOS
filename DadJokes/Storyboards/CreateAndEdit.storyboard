@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oK1-Nu-HFM">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Jokes Detail View Controller-->
+        <scene sceneID="Rxr-Zd-Su5">
+            <objects>
+                <viewController id="5Vi-eM-1Re" customClass="JokesDetailViewController" customModule="DadJokes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rrv-XG-l2N">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YG7-td-I5E">
+                                <rect key="frame" x="20" y="356" width="374" height="184"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell your joke down below!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-rG-9Ax">
+                                <rect key="frame" x="20" y="327" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJ7-BG-aXz">
+                                <rect key="frame" x="172" y="548" width="70" height="30"/>
+                                <state key="normal" title="Save Joke"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="5Vi-eM-1Re" eventType="touchUpInside" id="7M2-5P-Bbd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QG8-T3-Xfp" firstAttribute="trailing" secondItem="xJ7-BG-aXz" secondAttribute="trailing" constant="172" id="05p-qa-Het"/>
+                            <constraint firstItem="xJ7-BG-aXz" firstAttribute="top" secondItem="YG7-td-I5E" secondAttribute="bottom" constant="8" id="GZT-C8-dI7"/>
+                            <constraint firstItem="LkU-rG-9Ax" firstAttribute="top" secondItem="QG8-T3-Xfp" secondAttribute="top" constant="239" id="GhM-Pj-Way"/>
+                            <constraint firstItem="LkU-rG-9Ax" firstAttribute="leading" secondItem="QG8-T3-Xfp" secondAttribute="leading" constant="20" id="RSn-U9-NUw"/>
+                            <constraint firstItem="QG8-T3-Xfp" firstAttribute="trailing" secondItem="LkU-rG-9Ax" secondAttribute="trailing" constant="20" id="VZ7-3s-5Te"/>
+                            <constraint firstItem="QG8-T3-Xfp" firstAttribute="trailing" secondItem="YG7-td-I5E" secondAttribute="trailing" constant="20" id="YhO-Wn-3kC"/>
+                            <constraint firstItem="QG8-T3-Xfp" firstAttribute="bottom" secondItem="xJ7-BG-aXz" secondAttribute="bottom" constant="284" id="d56-ng-9fv"/>
+                            <constraint firstItem="YG7-td-I5E" firstAttribute="leading" secondItem="QG8-T3-Xfp" secondAttribute="leading" constant="20" id="gl9-Gr-xY1"/>
+                            <constraint firstItem="xJ7-BG-aXz" firstAttribute="leading" secondItem="QG8-T3-Xfp" secondAttribute="leading" constant="172" id="kep-yL-nur"/>
+                            <constraint firstItem="YG7-td-I5E" firstAttribute="top" secondItem="LkU-rG-9Ax" secondAttribute="bottom" constant="8" id="z6C-Tc-2mn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QG8-T3-Xfp"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jqW-7b-Ggl"/>
+                    <connections>
+                        <outlet property="jokeTextView" destination="YG7-td-I5E" id="xvv-ZK-PfY"/>
+                        <outlet property="saveButton" destination="xJ7-BG-aXz" id="O9I-mx-8np"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTc-z8-SsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1023.1884057971015" y="147.32142857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xwz-Sh-35Q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oK1-Nu-HFM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yJV-gc-hse">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5Vi-eM-1Re" kind="relationship" relationship="rootViewController" id="4nc-op-4XE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ro3-DV-EZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="283" y="147"/>
+        </scene>
+    </scenes>
+</document>
