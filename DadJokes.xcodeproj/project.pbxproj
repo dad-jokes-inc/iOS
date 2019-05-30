@@ -17,6 +17,9 @@
 		8FB9AF1F229DA28900E620F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9AF1D229DA28900E620F9 /* LaunchScreen.storyboard */; };
 		8FB9AF28229DA2E500E620F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AF27229DA2E500E620F9 /* User.swift */; };
 		8FB9AF2A229DA2FC00E620F9 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AF29229DA2FC00E620F9 /* Joke.swift */; };
+		8FDF9BD822A0323B007BEA9D /* JokesDisplay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FDF9BD722A0323B007BEA9D /* JokesDisplay.storyboard */; };
+		8FDF9BDA22A0331C007BEA9D /* JokesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF9BD922A0331C007BEA9D /* JokesTableViewController.swift */; };
+		8FDF9BDC22A03E5E007BEA9D /* PublicJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF9BDB22A03E5E007BEA9D /* PublicJoke.swift */; };
 		EF2A8B63229DBE360020076D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2A8B62229DBE360020076D /* Login.storyboard */; };
 		EF2A8B65229DC9240020076D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B64229DC9240020076D /* LoginViewController.swift */; };
 		EF2A8B68229DCF770020076D /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B67229DCF770020076D /* AppearanceHelper.swift */; };
@@ -35,6 +38,9 @@
 		8FB9AF20229DA28900E620F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB9AF27229DA2E500E620F9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8FB9AF29229DA2FC00E620F9 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
+		8FDF9BD722A0323B007BEA9D /* JokesDisplay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JokesDisplay.storyboard; sourceTree = "<group>"; };
+		8FDF9BD922A0331C007BEA9D /* JokesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesTableViewController.swift; sourceTree = "<group>"; };
+		8FDF9BDB22A03E5E007BEA9D /* PublicJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicJoke.swift; sourceTree = "<group>"; };
 		EF2A8B62229DBE360020076D /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		EF2A8B64229DC9240020076D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF2A8B67229DCF770020076D /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 				8FB9AF1D229DA28900E620F9 /* LaunchScreen.storyboard */,
 				8FB9AF18229DA28800E620F9 /* Main.storyboard */,
 				EF2A8B62229DBE360020076D /* Login.storyboard */,
+				8FDF9BD722A0323B007BEA9D /* JokesDisplay.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -104,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				8FB9AF27229DA2E500E620F9 /* User.swift */,
+				8FDF9BDB22A03E5E007BEA9D /* PublicJoke.swift */,
 				8FB9AF29229DA2FC00E620F9 /* Joke.swift */,
 				8F4E1EE7229E0DCB005C30AE /* Bearer.swift */,
 			);
@@ -115,6 +123,7 @@
 			children = (
 				8FB9AF16229DA28800E620F9 /* ViewController.swift */,
 				EF2A8B64229DC9240020076D /* LoginViewController.swift */,
+				8FDF9BD922A0331C007BEA9D /* JokesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -190,6 +199,7 @@
 				8FB9AF1F229DA28900E620F9 /* LaunchScreen.storyboard in Resources */,
 				8FB9AF1C229DA28900E620F9 /* Assets.xcassets in Resources */,
 				8FB9AF1A229DA28800E620F9 /* Main.storyboard in Resources */,
+				8FDF9BD822A0323B007BEA9D /* JokesDisplay.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +217,9 @@
 				EF2A8B65229DC9240020076D /* LoginViewController.swift in Sources */,
 				8FB9AF28229DA2E500E620F9 /* User.swift in Sources */,
 				8F4E1EE5229E0D83005C30AE /* JokeController.swift in Sources */,
+				8FDF9BDC22A03E5E007BEA9D /* PublicJoke.swift in Sources */,
 				EF2A8B68229DCF770020076D /* AppearanceHelper.swift in Sources */,
+				8FDF9BDA22A0331C007BEA9D /* JokesTableViewController.swift in Sources */,
 				8F2595D2229E2D6100DA2EF7 /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

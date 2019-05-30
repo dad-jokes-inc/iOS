@@ -16,6 +16,7 @@ enum Errors: Error {
     case noTokenError
     case encodingError
     case decodingError
+    case noPublicJokesError
     case noJokesError
     case noJokesByUserError
     case noJokeWithProvidedID
