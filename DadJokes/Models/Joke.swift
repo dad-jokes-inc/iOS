@@ -12,7 +12,7 @@ import Foundation
 
 
 struct Joke: Codable {
-    let id: Int
+    let id: Int?
     var joke: String
     var userID: Int
 }
