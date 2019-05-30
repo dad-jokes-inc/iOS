@@ -207,6 +207,57 @@ class JokeController {
             }.resume()
     }
     
+    //MARK: - Fetch a specific users jokes
+    
+    func fetchJokesByUser(withID userID: Int, completion: @escaping (Error?) -> Void) {
+        let requestURL = baseURL
+            .appendingPathComponent("jokes").appendingPathComponent("users").appendingPathComponent(String("\(userID)"))
+        
+        var request = URLRequest(url: requestURL)
+        
+        request.httpMethod = HTTPMethod.get.rawValue
+        
+        guard let bearer = bearer else {
+            completion(Errors.noTokenError)
+            return
+        }
+        
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode == 401 {
+                NSLog("Bad auth: \(String(describing: error))")
+                completion(Errors.authError)
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error getting users jokes: \(error)")
+                completion(Errors.noJokesByUserError)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned: \(String(describing: error))")
+                completion(Errors.noDataError)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                self.jokes = try decoder.decode([Joke].self, from: data)
+                completion(nil)
+            } catch {
+                NSLog("Error decoding jokes: \(error)")
+                completion(Errors.decodingError)
+            }
+            }.resume()
+        
+    }
+    
     //MARK: - Create Joke
     
     func createJoke(userID: Int, jokeContent: String, completion: @escaping (Error?) -> Void) {
