@@ -114,39 +114,38 @@ class JokesTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return false
+        }
+        return true
+    }
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            if indexPath.section == 0 {
-                let joke = jokeController.publicJokes[indexPath.row]
-                guard let id = joke.id else { return }
-                
-            } else {
-                let joke = jokeController.jokes[indexPath.row]
-                guard let userName = jokeController.user?.username, let jokeID = joke.id else { return }
-                if userName == joke.userName {
-                    jokeController.deletePrivateJoke(jokeID: jokeID) { (error) in
-                        if let error = error {
-                            print(error)
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            self.jokeController.jokes.remove(at: indexPath.row)
-                            self.tableView.deleteRows(at: [indexPath], with: .fade)
-                            self.tableView.reloadData()
-                        }
-                        
-                        
-                        
+            let joke = jokeController.jokes[indexPath.row]
+            guard let userName = jokeController.user?.username, let jokeID = joke.id else { return }
+            if userName == joke.userName {
+                jokeController.deletePrivateJoke(jokeID: jokeID) { (error) in
+                    if let error = error {
+                        print(error)
+                        return
                     }
+                    DispatchQueue.main.async {
+                        self.jokeController.jokes.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.reloadData()
+                    }
+                    
+                    
                     
                 }
                 
             }
+            
         }
-        
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

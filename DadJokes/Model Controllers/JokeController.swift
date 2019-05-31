@@ -452,8 +452,6 @@ class JokeController {
         
         let requestURL = baseURL.appendingPathComponent("jokes").appendingPathComponent(String(jokeID))
         
-        print(requestURL)
-        
         var request = URLRequest(url: requestURL)
         
         request.httpMethod = HTTPMethod.delete.rawValue
