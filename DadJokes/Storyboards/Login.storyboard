@@ -41,7 +41,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HX-V0-Def">
                                         <rect key="frame" x="0.0" y="76" width="286" height="30"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <state key="normal" title="LOGIN"/>
+                                        <state key="normal" title="Sign Up"/>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="qda-6l-Cjl" eventType="touchUpInside" id="StI-ia-wsO"/>
                                         </connections>
@@ -65,8 +65,8 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fLy-aN-uVf">
                                         <rect key="frame" x="80.5" y="27.5" width="125" height="29"/>
                                         <segments>
-                                            <segment title="Login"/>
                                             <segment title="Sign Up"/>
+                                            <segment title="Log In"/>
                                         </segments>
                                         <connections>
                                             <action selector="entryMethodChanged:" destination="qda-6l-Cjl" eventType="valueChanged" id="yO7-9o-Dle"/>
