@@ -53,7 +53,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8mh-uR-t3N">
                             <connections>
                                 <action selector="createTapped:" destination="DEf-0l-PCi" id="06B-Ff-AFP"/>
-                                <segue destination="Bns-gK-kXy" kind="show" id="jum-I4-tgQ"/>
+                                <segue destination="Bns-gK-kXy" kind="show" identifier="ShowCreateVC" id="jum-I4-tgQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -22,11 +22,12 @@ class JokesDetailViewController: UIViewController {
         }
     }
     
-    var jokeController: JokeController?
+    let jokeController = JokeController.shared
     var showDetail = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         updateViews()
     }
@@ -60,7 +61,7 @@ class JokesDetailViewController: UIViewController {
         guard let joke = jokeTextView.text,
             joke != "" else { return }
         
-        jokeController?.createPublicJoke(jokeContent: joke, completion: { (error) in
+        jokeController.createPublicJoke(jokeContent: joke, completion: { (error) in
             if let error = error {
                 NSLog("Error creating joke: \(error)")
                 return 
