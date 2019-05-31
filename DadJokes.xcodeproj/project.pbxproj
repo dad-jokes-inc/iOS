@@ -105,8 +105,8 @@
 			children = (
 				8FB9AF1D229DA28900E620F9 /* LaunchScreen.storyboard */,
 				8FB9AF18229DA28800E620F9 /* Main.storyboard */,
-				EF2A8B62229DBE360020076D /* Login.storyboard */,
 				8FDF9BD722A0323B007BEA9D /* JokesDisplay.storyboard */,
+				EF2A8B62229DBE360020076D /* Login.storyboard */,
 				EF9A93DE22A069B20040DA08 /* CreateAndEdit.storyboard */,
 			);
 			path = Storyboards;

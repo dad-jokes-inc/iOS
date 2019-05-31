@@ -13,7 +13,7 @@
         <!--Jokes Detail View Controller-->
         <scene sceneID="Rxr-Zd-Su5">
             <objects>
-                <viewController id="5Vi-eM-1Re" customClass="JokesDetailViewController" customModule="DadJokes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Edit" id="5Vi-eM-1Re" customClass="JokesDetailViewController" customModule="DadJokes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rrv-XG-l2N">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QG8-T3-Xfp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jqW-7b-Ggl"/>
+                    <navigationItem key="navigationItem" id="jqW-7b-Ggl">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gdQ-yE-WSy">
+                            <connections>
+                                <action selector="cancel:" destination="5Vi-eM-1Re" id="IPh-oC-L5a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="jokeTextView" destination="YG7-td-I5E" id="xvv-ZK-PfY"/>
                         <outlet property="saveButton" destination="xJ7-BG-aXz" id="O9I-mx-8np"/>
