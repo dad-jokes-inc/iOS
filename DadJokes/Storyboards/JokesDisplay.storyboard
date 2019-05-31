@@ -34,6 +34,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sgZ-k1-eRS" kind="show" identifier="ShowEditJokeVC" id="DXQ-EG-OzU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,12 +50,33 @@
                                 <segue destination="NCU-TV-8h2" kind="presentation" identifier="ShowLoginVC" id="aEH-0w-IjI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8mh-uR-t3N"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8mh-uR-t3N">
+                            <connections>
+                                <action selector="createTapped:" destination="DEf-0l-PCi" id="06B-Ff-AFP"/>
+                                <segue destination="Bns-gK-kXy" kind="show" id="jum-I4-tgQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySt-Nd-hnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="189.50892857142856"/>
+        </scene>
+        <!--CreateAndEdit-->
+        <scene sceneID="RcR-bf-WsI">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Create" storyboardName="CreateAndEdit" id="Bns-gK-kXy" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5mH-BF-In7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473" y="-37"/>
+        </scene>
+        <!--CreateAndEdit-->
+        <scene sceneID="MgJ-mL-8G7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CreateAndEdit" id="sgZ-k1-eRS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Pf-9m-YDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1886" y="57"/>
         </scene>
         <!--Login-->
         <scene sceneID="Ujh-ZB-2aI">

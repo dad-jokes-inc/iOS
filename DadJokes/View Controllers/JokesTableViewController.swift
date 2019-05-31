@@ -9,6 +9,7 @@
 import UIKit
 
 class JokesTableViewController: UITableViewController {
+    
     let jokeController = JokeController()
     
     override func viewDidLoad() {
@@ -35,9 +36,12 @@ class JokesTableViewController: UITableViewController {
             }
             
             DispatchQueue.main.async {
+                self.navigationItem.leftBarButtonItem?.isEnabled = false
+                self.navigationItem.leftBarButtonItem?.tintColor = .clear
                 self.tableView.reloadData()
             }
         }
+        
         
     }
     
@@ -79,6 +83,29 @@ class JokesTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let publicJoke = jokeController.publicJokes[indexPath.row]
+            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
+            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
+                jokeDetailViewController.jokeController = jokeController
+                jokeDetailViewController.publicJoke = publicJoke
+                jokeDetailViewController.showDetail = true
+                self.present(jokeDetailViewController, animated: true)
+            }
+        } else {
+            let joke = jokeController.jokes[indexPath.row]
+            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
+            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
+                jokeDetailViewController.jokeController = jokeController
+                jokeDetailViewController.joke = joke
+                jokeDetailViewController.showDetail = true
+                self.present(jokeDetailViewController, animated: true)
+            }
+            
+        }
+    }
+    
     
     /*
      // Override to support conditional editing of the table view.
@@ -115,16 +142,18 @@ class JokesTableViewController: UITableViewController {
      }
      */
     
-    
-    // MARK: - Navigation
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowLoginVC" {
-            guard let destVC = segue.destination as? LoginViewController else { return }
-            destVC.jokeController = jokeController
+    @IBAction func createTapped(_ sender: Any) {
+        let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
+        if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Create") as? JokesDetailViewController {
+            jokeDetailViewController.jokeController = jokeController
+            self.present(jokeDetailViewController, animated: true)
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowLoginVC" {
+            guard let destinatonVC = segue.destination as? LoginViewController else { return }
+            destinatonVC.jokeController = jokeController
+        }
+    }
 }

@@ -16,6 +16,12 @@ class JokesDetailViewController: UIViewController {
         }
     }
     
+    var publicJoke: PublicJoke? {
+        didSet {
+            updateViews()
+        }
+    }
+    
     var jokeController: JokeController?
     var showDetail = false
 
@@ -31,6 +37,10 @@ class JokesDetailViewController: UIViewController {
         guard isViewLoaded else { return }
         if let joke = joke?.joke {
             jokeTextView.text = "\(joke)"
+        }
+        
+        if let publicJoke = publicJoke?.publicJoke {
+            jokeTextView.text = "\(publicJoke)"
         }
         
         if showDetail {
@@ -55,6 +65,9 @@ class JokesDetailViewController: UIViewController {
                 NSLog("Error creating joke: \(error)")
                 return 
             }
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
         })
     }
     
@@ -62,4 +75,10 @@ class JokesDetailViewController: UIViewController {
 
     @IBOutlet weak var jokeTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
+    
+    // MARK: - IBActions
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
