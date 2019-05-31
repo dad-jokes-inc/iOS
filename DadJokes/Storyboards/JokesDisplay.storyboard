@@ -152,6 +152,7 @@
                         <outlet property="jokeTextView" destination="hk3-JU-zDW" id="SXC-mY-uhE"/>
                         <outlet property="saveButton" destination="Jh3-xb-jXX" id="9Eg-VW-ztE"/>
                         <outlet property="savePrivateJokeButton" destination="lTF-ua-Xdh" id="lFD-Tv-xd4"/>
+                        <outlet property="textLeabel" destination="W4B-WO-RtR" id="Xud-TJ-PGP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFc-H0-Gmf" userLabel="First Responder" sceneMemberID="firstResponder"/>

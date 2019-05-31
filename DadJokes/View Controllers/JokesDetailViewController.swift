@@ -30,10 +30,9 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         jokeTextView.delegate = self
-        
+    
         updateViews()
         setupAppearance()
         checkIfUpdatingJoke()
@@ -99,8 +98,12 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
         jokeTextView.layer.borderWidth = 1
         jokeTextView.layer.borderColor = AppearanceHelper.dadJokesYellow.cgColor
         jokeTextView.textColor = .white
+        jokeTextView.tintColor = AppearanceHelper.dadJokesYellow
+        
+        textLeabel.textColor = .white
         
         saveButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
+        savePrivateJokeButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,17 +115,19 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     @objc func keyboardWillChange(notification: Notification) {
         
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
+        view.frame.origin.y = -100
         
-        if notification.name == UIResponder.keyboardWillShowNotification ||
-            notification.name == UIResponder.keyboardWillChangeFrameNotification {
-            
-            view.frame.origin.y = -keyboardRect.height
-        } else {
-            view.frame.origin.y = 0
-        }
+//        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+//            return
+//        }
+//
+//        if notification.name == UIResponder.keyboardWillShowNotification ||
+//            notification.name == UIResponder.keyboardWillChangeFrameNotification {
+//
+//            view.frame.origin.y = -keyboardRect.height
+//        } else {
+//            view.frame.origin.y = 0
+//        }
     }
     
     deinit {
@@ -175,4 +180,5 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var jokeTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var savePrivateJokeButton: UIButton!
+    @IBOutlet weak var textLeabel: UILabel!
 }

@@ -105,8 +105,7 @@ class JokesTableViewController: UITableViewController {
             return "Private Jokes"
         }
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
             view.backgroundView?.backgroundColor = AppearanceHelper.lightBlue
