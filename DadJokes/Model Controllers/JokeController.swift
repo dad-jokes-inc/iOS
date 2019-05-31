@@ -24,6 +24,8 @@ class JokeController {
     var publicJokes: [PublicJoke] = []
     
     var jokes: [Joke] = []
+    var publicUserJokes: [PublicJoke] = []
+    
     
     var bearer: Bearer?
     var user: User?
@@ -287,7 +289,7 @@ class JokeController {
             let decoder = JSONDecoder()
             
             do {
-                self.jokes = try decoder.decode([Joke].self, from: data)
+                
                 completion(nil)
             } catch {
                 NSLog("Error decoding jokes: \(error)")
@@ -413,7 +415,7 @@ class JokeController {
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let joke = Joke(id: nil, joke: jokeContent, userID: userID)
+        let joke = Joke(id: nil, joke: jokeContent, userID: userID, userName: nil)
         
         do {
             request.httpBody = try JSONEncoder().encode(joke)
@@ -444,13 +446,11 @@ class JokeController {
         
     }
     
-    //MARK: - Delete Joke
+    //MARK: - Delete Private Joke
     
-    func deleteJoke(jokeID: Int, completion: @escaping (Error?) -> Void) {
+    func deletePrivateJoke(jokeID: Int, completion: @escaping (Error?) -> Void) {
         
         let requestURL = baseURL.appendingPathComponent("jokes").appendingPathComponent(String(jokeID))
-        
-        print(requestURL)
         
         var request = URLRequest(url: requestURL)
         
@@ -471,7 +471,7 @@ class JokeController {
         URLSession.shared.dataTask(with: request) { (_, response, error) in
             
             if let response = response as? HTTPURLResponse,
-                response.statusCode != 201 {
+                response.statusCode != 204 {
                 
                 // Something went wrong
                 completion(Errors.unexpectedResponseError)
@@ -510,7 +510,7 @@ class JokeController {
         
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let joke = Joke(id: jokeID, joke: jokeContent, userID: userID)
+        let joke = Joke(id: jokeID, joke: jokeContent, userID: userID, userName: nil)
         
         do {
             request.httpBody = try JSONEncoder().encode(joke)

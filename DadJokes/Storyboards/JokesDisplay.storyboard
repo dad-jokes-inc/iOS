@@ -116,12 +116,21 @@
                                     <action selector="saveButtonPressed:" destination="Yok-um-lev" eventType="touchUpInside" id="jeI-Un-Vmb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTF-ua-Xdh">
+                                <rect key="frame" x="146.5" y="586" width="121" height="30"/>
+                                <state key="normal" title="Save Private Joke"/>
+                                <connections>
+                                    <action selector="savePrivateJokeButtonPressed:" destination="Yok-um-lev" eventType="touchUpInside" id="Aiw-Gm-B7f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Eew-Sz-hR9" firstAttribute="trailing" secondItem="Jh3-xb-jXX" secondAttribute="trailing" constant="172" id="0Wz-yh-WJA"/>
                             <constraint firstItem="Jh3-xb-jXX" firstAttribute="top" secondItem="hk3-JU-zDW" secondAttribute="bottom" constant="8" id="8AT-g2-t0V"/>
+                            <constraint firstItem="lTF-ua-Xdh" firstAttribute="centerX" secondItem="SAt-Vi-Cb8" secondAttribute="centerX" id="ATq-SC-ge1"/>
                             <constraint firstItem="Jh3-xb-jXX" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="172" id="Hb7-lE-j7Y"/>
+                            <constraint firstItem="lTF-ua-Xdh" firstAttribute="top" secondItem="Jh3-xb-jXX" secondAttribute="bottom" constant="8" id="Pee-au-4qF"/>
                             <constraint firstItem="W4B-WO-RtR" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="20" id="YN9-e2-l2y"/>
                             <constraint firstItem="Eew-Sz-hR9" firstAttribute="bottom" secondItem="Jh3-xb-jXX" secondAttribute="bottom" constant="284" id="Z6f-pt-e8p"/>
                             <constraint firstItem="hk3-JU-zDW" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="20" id="fLJ-N7-o08"/>
@@ -142,6 +151,7 @@
                     <connections>
                         <outlet property="jokeTextView" destination="hk3-JU-zDW" id="SXC-mY-uhE"/>
                         <outlet property="saveButton" destination="Jh3-xb-jXX" id="9Eg-VW-ztE"/>
+                        <outlet property="savePrivateJokeButton" destination="lTF-ua-Xdh" id="lFD-Tv-xd4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFc-H0-Gmf" userLabel="First Responder" sceneMemberID="firstResponder"/>

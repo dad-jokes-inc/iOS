@@ -105,8 +105,7 @@ class JokesTableViewController: UITableViewController {
             return "Private Jokes"
         }
     }
-    
-<<<<<<< HEAD
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
             view.backgroundView?.backgroundColor = AppearanceHelper.lightBlue
@@ -114,67 +113,39 @@ class JokesTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 0 {
-            let publicJoke = jokeController.publicJokes[indexPath.row]
-            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
-            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
-                jokeDetailViewController.jokeController = jokeController
-                jokeDetailViewController.publicJoke = publicJoke
-                jokeDetailViewController.showDetail = true
-                self.present(jokeDetailViewController, animated: true)
-            }
-        } else {
+            return false
+        }
+        return true
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
             let joke = jokeController.jokes[indexPath.row]
-            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
-            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
-                jokeDetailViewController.jokeController = jokeController
-                jokeDetailViewController.joke = joke
-                jokeDetailViewController.showDetail = true
-                self.present(jokeDetailViewController, animated: true)
+            guard let userName = jokeController.user?.username, let jokeID = joke.id else { return }
+            if userName == joke.userName {
+                jokeController.deletePrivateJoke(jokeID: jokeID) { (error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.jokeController.jokes.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.reloadData()
+                    }
+                    
+                    
+                    
+                }
+                
             }
             
         }
     }
-=======
-   
->>>>>>> master
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }    
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

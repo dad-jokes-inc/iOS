@@ -27,13 +27,9 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-<<<<<<< HEAD
-        jokeTextView.delegate = self
-        
-=======
 
->>>>>>> master
+        jokeTextView.delegate = self
+    
         updateViews()
         setupAppearance()
         
@@ -61,6 +57,11 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
             saveButton.isHidden = false
             jokeTextView.isEditable = true
             title = "Create A Joke!"
+        }
+        
+        guard let _ = jokeController.bearer else {
+            savePrivateJokeButton.isHidden = true
+            return
         }
         
     }
@@ -116,19 +117,35 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
                 return 
             }
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }
         })
+    }
+    
+    
+    @IBAction func savePrivateJokeButtonPressed(_ sender: Any) {
+        guard let joke = jokeTextView.text,
+            joke != "" else { return }
+        guard let userID = jokeController.user?.id else { return }
+        
+        jokeController.createJoke(userID: userID, jokeContent: joke) { (error) in
+            if let error = error {
+                NSLog("Error creating private joke: \(error)")
+                return
+            }
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - IBOutlets
     
     @IBOutlet weak var jokeTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
-    
-    // MARK: - IBActions
-    
-    @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+    @IBOutlet weak var savePrivateJokeButton: UIButton!
 }
