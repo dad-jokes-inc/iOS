@@ -105,11 +105,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         noAccountLabel.textColor = AppearanceHelper.dadJokesGreyishWhite
         
-//        entryMethodSegmentedControl.layer.backgroundColor = AppearanceHelper.dadJokesYellow.cgColor
+        entryMethodSegmentedControl.layer.backgroundColor = AppearanceHelper.dadJokesBlue.cgColor
         entryMethodSegmentedControl.layer.cornerRadius = 10
         entryMethodSegmentedControl.layer.borderWidth = 1
         entryMethodSegmentedControl.layer.borderColor = AppearanceHelper.dadJokesYellow.cgColor
-//        entryMethodSegmentedControl.tintColor = AppearanceHelper.dadJokesBlue
+        entryMethodSegmentedControl.tintColor = AppearanceHelper.dadJokesYellow
     }
     
     // MARK: - Actions

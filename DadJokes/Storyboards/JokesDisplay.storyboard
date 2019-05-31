@@ -18,26 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="nFa-J1-o7d">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bjS-Ie-1sT">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="bjS-Ie-1sT" firstAttribute="leading" secondItem="nFa-J1-o7d" secondAttribute="leading" id="HBu-rr-321"/>
-                                <constraint firstAttribute="trailing" secondItem="bjS-Ie-1sT" secondAttribute="trailing" id="KCc-Aj-8yM"/>
-                                <constraint firstAttribute="bottom" secondItem="bjS-Ie-1sT" secondAttribute="bottom" id="cdE-2c-zn2"/>
-                                <constraint firstItem="bjS-Ie-1sT" firstAttribute="top" secondItem="nFa-J1-o7d" secondAttribute="top" id="td2-fU-xBW"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="JokeCell" textLabel="qHm-sz-OSb" style="IBUITableViewCellStyleDefault" id="ChX-Db-wXH">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ChX-Db-wXH" id="DeL-F1-owc">
                                     <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
@@ -75,9 +58,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="searchTextField" destination="bjS-Ie-1sT" id="qaA-I4-k86"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySt-Nd-hnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
