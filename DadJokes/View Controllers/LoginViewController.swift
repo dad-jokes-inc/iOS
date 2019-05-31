@@ -32,9 +32,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         setupAppearance()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
     }
     
     deinit {
@@ -46,25 +53,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Methods
     
-    @objc func keyboardWillChange(notification: Notification) {
-        
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        
-        if notification.name == UIResponder.keyboardWillShowNotification ||
-            notification.name == UIResponder.keyboardWillChangeFrameNotification {
-            
-            view.frame.origin.y = -keyboardRect.height
-        } else {
-            view.frame.origin.y = 0
-        }
-    }
-    
+//    @objc func keyboardWillChange(notification: Notification) {
+//
+//        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+//            return
+//        }
+//
+//        if notification.name == UIResponder.keyboardWillShowNotification ||
+//            notification.name == UIResponder.keyboardWillChangeFrameNotification {
+//
+//            view.frame.origin.y = -keyboardRect.height
+//        } else {
+//            view.frame.origin.y = 0
+//        }
+//    }
+//
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         passwordTextField.resignFirstResponder()
-        
+
         return true
     }
     
@@ -91,11 +98,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         noAccountLabel.textColor = AppearanceHelper.dadJokesGreyishWhite
         
-        entryMethodSegmentedControl.layer.backgroundColor = AppearanceHelper.dadJokesYellow.cgColor
+//        entryMethodSegmentedControl.layer.backgroundColor = AppearanceHelper.dadJokesYellow.cgColor
         entryMethodSegmentedControl.layer.cornerRadius = 10
         entryMethodSegmentedControl.layer.borderWidth = 1
         entryMethodSegmentedControl.layer.borderColor = AppearanceHelper.dadJokesYellow.cgColor
-        entryMethodSegmentedControl.tintColor = AppearanceHelper.dadJokesBlue
+//        entryMethodSegmentedControl.tintColor = AppearanceHelper.dadJokesBlue
     }
     
     // MARK: - Actions

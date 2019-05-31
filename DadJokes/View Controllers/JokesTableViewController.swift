@@ -12,8 +12,13 @@ class JokesTableViewController: UITableViewController {
     
     let jokeController = JokeController.shared
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAppearance()
         
         jokeController.fetchPublicJokes { (error) in
             if let error = error {
@@ -83,6 +88,13 @@ class JokesTableViewController: UITableViewController {
             cell.textLabel?.text = joke.joke
         }
         
+        cell.backgroundColor = AppearanceHelper.dadJokesYellow
+        cell.layer.cornerRadius = 5
+        cell.layer.shadowColor = AppearanceHelper.dadJokesYellow.cgColor
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = AppearanceHelper.dadJokesBlue.cgColor
+        cell.textLabel?.textColor = AppearanceHelper.dadJokesBlue
+        
         return cell
     }
     
@@ -94,7 +106,15 @@ class JokesTableViewController: UITableViewController {
         }
     }
     
-   
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let view = view as? UITableViewHeaderFooterView {
+            view.backgroundView?.backgroundColor = AppearanceHelper.lightBlue
+            view.textLabel?.textColor = AppearanceHelper.dadJokesGreyishWhite
+        }
+    }
+    
+    
     
     
     /*
@@ -150,5 +170,11 @@ class JokesTableViewController: UITableViewController {
                 destinationVC.showDetail = true
             }
         }
+    }
+    
+    // MARK: - Methods
+    
+    func setupAppearance() {
+        tableView.backgroundColor = AppearanceHelper.dadJokesBlue
     }
 }

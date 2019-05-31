@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JokesDetailViewController: UIViewController {
+class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     var joke: Joke? {
         didSet {
@@ -24,12 +24,19 @@ class JokesDetailViewController: UIViewController {
     
     let jokeController = JokeController.shared
     var showDetail = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
+        jokeTextView.delegate = self
+        
         updateViews()
+        setupAppearance()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     // MARK: - Methods
@@ -55,8 +62,47 @@ class JokesDetailViewController: UIViewController {
         
     }
     
+    func setupAppearance() {
+        view.backgroundColor = AppearanceHelper.dadJokesBlue
+        jokeTextView.backgroundColor = AppearanceHelper.dadJokesBlue
+        jokeTextView.layer.borderWidth = 1
+        jokeTextView.layer.borderColor = AppearanceHelper.dadJokesYellow.cgColor
+        jokeTextView.textColor = .white
+        
+        saveButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        jokeTextView.resignFirstResponder()
+        
+        return true
+    }
+    
+    @objc func keyboardWillChange(notification: Notification) {
+        
+        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        if notification.name == UIResponder.keyboardWillShowNotification ||
+            notification.name == UIResponder.keyboardWillChangeFrameNotification {
+            
+            view.frame.origin.y = -keyboardRect.height
+        } else {
+            view.frame.origin.y = 0
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+    }
+    
     // MARK: - IBActions
-
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let joke = jokeTextView.text,
             joke != "" else { return }
@@ -73,7 +119,7 @@ class JokesDetailViewController: UIViewController {
     }
     
     // MARK: - IBOutlets
-
+    
     @IBOutlet weak var jokeTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     
