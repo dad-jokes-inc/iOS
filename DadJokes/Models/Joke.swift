@@ -15,6 +15,7 @@ struct Joke: Codable {
     let id: Int?
     var joke: String
     var userID: Int
+    var userName: String?
 }
 
 extension Joke {
@@ -22,6 +23,7 @@ extension Joke {
         case id
         case joke
         case userID = "user_id"
+        case userName = "username"
     }
     
     func encode(to encoder: Encoder) throws {
