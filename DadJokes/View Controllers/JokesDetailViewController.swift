@@ -65,6 +65,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
             jokeTextView.isEditable = false
         } else {
             saveButton.isHidden = false
+            updatePrivateJokeButton.isHidden = true
             jokeTextView.isEditable = true
             title = "Create A Joke!"
         }
