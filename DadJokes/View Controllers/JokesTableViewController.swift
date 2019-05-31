@@ -10,7 +10,7 @@ import UIKit
 
 class JokesTableViewController: UITableViewController {
     
-    let jokeController = JokeController()
+    let jokeController = JokeController.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,17 @@ class JokesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        jokeController.fetchPublicJokes { (error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         guard let _ = jokeController.bearer else { return }
         jokeController.fetchAllJokes { (error) in
             if let error = error {
@@ -83,28 +94,7 @@ class JokesTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let publicJoke = jokeController.publicJokes[indexPath.row]
-            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
-            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
-                jokeDetailViewController.jokeController = jokeController
-                jokeDetailViewController.publicJoke = publicJoke
-                jokeDetailViewController.showDetail = true
-                self.present(jokeDetailViewController, animated: true)
-            }
-        } else {
-            let joke = jokeController.jokes[indexPath.row]
-            let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
-            if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Edit") .navigationController?.viewControllers.first as? JokesDetailViewController {
-                jokeDetailViewController.jokeController = jokeController
-                jokeDetailViewController.joke = joke
-                jokeDetailViewController.showDetail = true
-                self.present(jokeDetailViewController, animated: true)
-            }
-            
-        }
-    }
+   
     
     
     /*
@@ -142,18 +132,23 @@ class JokesTableViewController: UITableViewController {
      }
      */
     
-    @IBAction func createTapped(_ sender: Any) {
-        let createAndEditStoryboard = UIStoryboard(name: "CreateAndEdit", bundle: nil)
-        if let jokeDetailViewController = createAndEditStoryboard.instantiateViewController(withIdentifier: "Create") as? JokesDetailViewController {
-            jokeDetailViewController.jokeController = jokeController
-            self.present(jokeDetailViewController, animated: true)
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowLoginVC" {
-            guard let destinatonVC = segue.destination as? LoginViewController else { return }
-            destinatonVC.jokeController = jokeController
+        
+        if segue.identifier == "ShowEditVC" {
+            guard let destinationVC = segue.destination as? JokesDetailViewController else {
+                print("Nope!")
+                return
+            }
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            if indexPath.section == 0 {
+                let publicJoke = jokeController.publicJokes[indexPath.row]
+                destinationVC.publicJoke = publicJoke
+                destinationVC.showDetail = true
+            } else {
+                let joke = jokeController.jokes[indexPath.row]
+                destinationVC.joke = joke
+                destinationVC.showDetail = true
+            }
         }
     }
 }

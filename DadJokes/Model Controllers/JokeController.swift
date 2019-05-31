@@ -9,6 +9,7 @@
 import Foundation
 
 class JokeController {
+    static let shared = JokeController()
     
     init() {
         loadFromPersistentStore()

@@ -23,7 +23,6 @@
 		EF2A8B63229DBE360020076D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF2A8B62229DBE360020076D /* Login.storyboard */; };
 		EF2A8B65229DC9240020076D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B64229DC9240020076D /* LoginViewController.swift */; };
 		EF2A8B68229DCF770020076D /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2A8B67229DCF770020076D /* AppearanceHelper.swift */; };
-		EF9A93DF22A069B20040DA08 /* CreateAndEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9A93DE22A069B20040DA08 /* CreateAndEdit.storyboard */; };
 		EF9A93E122A06B570040DA08 /* JokesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9A93E022A06B570040DA08 /* JokesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		EF2A8B62229DBE360020076D /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		EF2A8B64229DC9240020076D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF2A8B67229DCF770020076D /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
-		EF9A93DE22A069B20040DA08 /* CreateAndEdit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAndEdit.storyboard; sourceTree = "<group>"; };
 		EF9A93E022A06B570040DA08 /* JokesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +105,6 @@
 				8FB9AF18229DA28800E620F9 /* Main.storyboard */,
 				8FDF9BD722A0323B007BEA9D /* JokesDisplay.storyboard */,
 				EF2A8B62229DBE360020076D /* Login.storyboard */,
-				EF9A93DE22A069B20040DA08 /* CreateAndEdit.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF9A93DF22A069B20040DA08 /* CreateAndEdit.storyboard in Resources */,
 				EF2A8B63229DBE360020076D /* Login.storyboard in Resources */,
 				8FB9AF1F229DA28900E620F9 /* LaunchScreen.storyboard in Resources */,
 				8FB9AF1C229DA28900E620F9 /* Assets.xcassets in Resources */,
