@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,7 +36,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="sgZ-k1-eRS" kind="show" identifier="ShowEditJokeVC" id="DXQ-EG-OzU"/>
+                                    <segue destination="Yok-um-lev" kind="show" identifier="ShowEditVC" id="HJA-xu-b8Y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,7 +54,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8mh-uR-t3N">
                             <connections>
                                 <action selector="createTapped:" destination="DEf-0l-PCi" id="06B-Ff-AFP"/>
-                                <segue destination="Bns-gK-kXy" kind="show" identifier="ShowCreateVC" id="jum-I4-tgQ"/>
+                                <segue destination="Yok-um-lev" kind="show" identifier="" id="6jB-ph-mSp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -61,22 +62,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySt-Nd-hnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="189.50892857142856"/>
-        </scene>
-        <!--CreateAndEdit-->
-        <scene sceneID="RcR-bf-WsI">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Create" storyboardName="CreateAndEdit" id="Bns-gK-kXy" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5mH-BF-In7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1473" y="-37"/>
-        </scene>
-        <!--CreateAndEdit-->
-        <scene sceneID="MgJ-mL-8G7">
-            <objects>
-                <viewControllerPlaceholder storyboardName="CreateAndEdit" id="sgZ-k1-eRS" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Pf-9m-YDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1886" y="57"/>
         </scene>
         <!--Login-->
         <scene sceneID="Ujh-ZB-2aI">
@@ -104,5 +89,67 @@
             </objects>
             <point key="canvasLocation" x="63.768115942028992" y="189.50892857142856"/>
         </scene>
+        <!--Jokes Detail View Controller-->
+        <scene sceneID="CqL-oP-mRg">
+            <objects>
+                <viewController storyboardIdentifier="Edit" id="Yok-um-lev" customClass="JokesDetailViewController" customModule="DadJokes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SAt-Vi-Cb8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-JU-zDW">
+                                <rect key="frame" x="20" y="408" width="374" height="132"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell your joke down below!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4B-WO-RtR">
+                                <rect key="frame" x="20" y="379" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh3-xb-jXX">
+                                <rect key="frame" x="172" y="548" width="70" height="30"/>
+                                <state key="normal" title="Save Joke"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="Yok-um-lev" eventType="touchUpInside" id="jeI-Un-Vmb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Eew-Sz-hR9" firstAttribute="trailing" secondItem="Jh3-xb-jXX" secondAttribute="trailing" constant="172" id="0Wz-yh-WJA"/>
+                            <constraint firstItem="Jh3-xb-jXX" firstAttribute="top" secondItem="hk3-JU-zDW" secondAttribute="bottom" constant="8" id="8AT-g2-t0V"/>
+                            <constraint firstItem="Jh3-xb-jXX" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="172" id="Hb7-lE-j7Y"/>
+                            <constraint firstItem="W4B-WO-RtR" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="20" id="YN9-e2-l2y"/>
+                            <constraint firstItem="Eew-Sz-hR9" firstAttribute="bottom" secondItem="Jh3-xb-jXX" secondAttribute="bottom" constant="284" id="Z6f-pt-e8p"/>
+                            <constraint firstItem="hk3-JU-zDW" firstAttribute="leading" secondItem="Eew-Sz-hR9" secondAttribute="leading" constant="20" id="fLJ-N7-o08"/>
+                            <constraint firstItem="W4B-WO-RtR" firstAttribute="top" secondItem="Eew-Sz-hR9" secondAttribute="top" constant="239" id="kV3-2T-Ril"/>
+                            <constraint firstItem="hk3-JU-zDW" firstAttribute="top" secondItem="W4B-WO-RtR" secondAttribute="bottom" constant="8" id="ql2-EW-Biz"/>
+                            <constraint firstItem="Eew-Sz-hR9" firstAttribute="trailing" secondItem="W4B-WO-RtR" secondAttribute="trailing" constant="20" id="v0h-GP-hGJ"/>
+                            <constraint firstItem="Eew-Sz-hR9" firstAttribute="trailing" secondItem="hk3-JU-zDW" secondAttribute="trailing" constant="20" id="wVa-6X-PDg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Eew-Sz-hR9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fTA-sR-OmB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hbk-lT-WuJ">
+                            <connections>
+                                <action selector="cancel:" destination="Yok-um-lev" id="6Iy-Oy-PZR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="jokeTextView" destination="hk3-JU-zDW" id="SXC-mY-uhE"/>
+                        <outlet property="saveButton" destination="Jh3-xb-jXX" id="9Eg-VW-ztE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MFc-H0-Gmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1884" y="204"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="6jB-ph-mSp"/>
+    </inferredMetricsTieBreakers>
 </document>
