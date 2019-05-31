@@ -110,6 +110,9 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
         
         saveButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
         savePrivateJokeButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
+        
+        updatePrivateJokeButton.tintColor = AppearanceHelper.dadJokesGreyishWhite
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -121,7 +124,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     @objc func keyboardWillChange(notification: Notification) {
         
-        view.frame.origin.y = -100
+        view.frame.origin.y = -150
         
 //        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
 //            return

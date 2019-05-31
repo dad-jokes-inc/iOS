@@ -174,8 +174,3 @@ class JokesTableViewController: UITableViewController {
     }
 }
 
-extension JokesTableViewController: UISearchBarDelegate {
-    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        jokeController.publicJokes.filter({ $0.prefix(searchText) })
-    }
-}
