@@ -13,6 +13,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     var joke: Joke? {
         didSet {
             updateViews()
+            checkIfUpdatingJoke()
         }
     }
     
@@ -24,6 +25,8 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
     let jokeController = JokeController.shared
     var showDetail = false
+    var updatingJoke = false
+    var jokeID: Int? // For updating our private jokes
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     
         updateViews()
         setupAppearance()
+        checkIfUpdatingJoke()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -44,6 +48,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
         guard isViewLoaded else { return }
         if let joke = joke?.joke {
             jokeTextView.text = "\(joke)"
+            
         }
         
         if let publicJoke = publicJoke?.publicJoke {
@@ -52,6 +57,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
         
         if showDetail {
             saveButton.isHidden = true
+            savePrivateJokeButton.isHidden = true
             jokeTextView.isEditable = false
         } else {
             saveButton.isHidden = false
@@ -64,6 +70,26 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
             return
         }
         
+    }
+    
+    func checkIfUpdatingJoke() {
+        guard isViewLoaded else { return }
+        if let joke = joke {
+            if let name = jokeController.user?.username  {
+                if name == joke.userName {
+                    // This is our joke we can update it
+                    updatingJoke = true
+                    if let id = joke.id {
+                        jokeID = id
+                    }
+                    jokeTextView.isEditable = true
+                    
+                } else {
+                    updatingJoke = false
+                    
+                }
+            }
+        }
     }
     
     func setupAppearance() {
@@ -134,16 +160,16 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
             joke != "" else { return }
         guard let userID = jokeController.user?.id else { return }
         
-        jokeController.createJoke(userID: userID, jokeContent: joke) { (error) in
-            if let error = error {
-                NSLog("Error creating private joke: \(error)")
-                return
-            }
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+            jokeController.createJoke(userID: userID, jokeContent: joke) { (error) in
+                if let error = error {
+                    NSLog("Error creating private joke: \(error)")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
-    }
     
     @IBAction func cancel(_ sender: Any) {
         navigationController?.popViewController(animated: true)

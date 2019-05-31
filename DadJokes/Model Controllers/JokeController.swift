@@ -522,14 +522,6 @@ class JokeController {
         
         URLSession.shared.dataTask(with: request) { (_, response, error) in
             
-            if let response = response as? HTTPURLResponse,
-                response.statusCode != 201 {
-                
-                // Something went wrong
-                completion(Errors.unexpectedResponseError)
-                return
-            }
-            
             if let error = error {
                 NSLog("Error updating joke: \(error)")
                 completion(Errors.errorUpdatingJoke)
