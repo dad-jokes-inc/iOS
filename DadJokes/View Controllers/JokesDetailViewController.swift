@@ -26,6 +26,8 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     let jokeController = JokeController.shared
     var showDetail = false
     var updatingJoke = false
+    
+    
     var jokeID: Int? // For updating our private jokes
     
     override func viewDidLoad() {
@@ -58,6 +60,8 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
         if showDetail {
             saveButton.isHidden = true
             savePrivateJokeButton.isHidden = true
+            updatePrivateJokeButton.isHidden = true
+            textLeabel.text = "Check out this Joke!"
             jokeTextView.isEditable = false
         } else {
             saveButton.isHidden = false
@@ -82,6 +86,7 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
                     if let id = joke.id {
                         jokeID = id
                     }
+                    updatePrivateJokeButton.isHidden = false
                     jokeTextView.isEditable = true
                     
                 } else {
@@ -171,6 +176,24 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
             }
         }
     
+    @IBAction func updatePrivateJoke(_ sender: Any) {
+        guard let joke = jokeTextView.text,
+            joke != "" else { return }
+        guard let userID = jokeController.user?.id,
+        let jokeID = jokeID else { return }
+        
+        jokeController.updateJoke(jokeID: jokeID, jokeContent: joke, userID: userID) { (error) in
+            if let error = error {
+                NSLog("Error updating private joke: \(error)")
+                return
+            }
+            DispatchQueue.main.async {
+                self.updatePrivateJokeButton.isHidden = true
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -180,5 +203,6 @@ class JokesDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var jokeTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var savePrivateJokeButton: UIButton!
+    @IBOutlet weak var updatePrivateJokeButton: UIButton!
     @IBOutlet weak var textLeabel: UILabel!
 }
